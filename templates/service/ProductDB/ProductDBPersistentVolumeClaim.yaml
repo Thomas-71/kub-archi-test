@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: storage-product-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  ressources:
+    requests:
+      storage: {{ .Values.mysql.productStorage }}
+  
