@@ -5,7 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  ressources:
+  resources:
     requests:
       storage: {{ .Values.mysql.productStorage }}
   
