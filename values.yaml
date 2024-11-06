@@ -5,9 +5,8 @@ postgres:
     port: 5432
     database:
       name: "Product"
-    user:
-      name: "default"
-      password: "1234"
+    name: "default"
+    password: "1234"
     storage: "2Gi"
   
   user:
@@ -15,7 +14,6 @@ postgres:
     port: 5433
     database:
       name: "User"
-    user:
-      name: "default"
-      password: "1234"
+    name: "default"
+    password: "1234"
     storage: "2Gi"
