@@ -8,3 +8,11 @@ data:
   POSTGRES_DB: "{{ .Values.postgres.product.dbName }}"
   POSTGRES_USER: "{{ .Values.postgres.product.name }}"
   POSTGRES_PASSWORD: "{{ .Values.postgres.product.password }}"
+  schema.sql: |
+    -- Script SQL pour créer les tables et les relations de la base Product
+    CREATE TABLE IF NOT EXISTS products (
+      id SERIAL PRIMARY KEY,
+      name VARCHAR(100) NOT NULL,
+      price DECIMAL NOT NULL
+    );
+    -- Ajoutez d'autres tables et relations ici

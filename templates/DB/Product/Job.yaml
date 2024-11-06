@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: apply-schema-product
+  namespace: argo-kube-test
+spec:
+  template:
+    spec:
+      containers:
+      - name: apply-schema
+        image: postgres:13.16  # Utilisez la même version que votre instance
+        env:
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-product-secret  # Nom du secret pour le mot de passe
+              key: password
+        command: ["psql"]
+        args:
+          - "-h"
+          - "postgres-product-service"  # Nom du service pour Product
+          - "-U"
+          - "default"  # Nom d'utilisateur
+          - "-d"
+          - "Product"  # Nom de la base de données
+          - "-f"
+          - "/schema/schema.sql"
+        volumeMounts:
+        - name: schema-volume
+          mountPath: /schema
+      restartPolicy: Never
+      volumes:
+      - name: schema-volume
+        configMap:
+          name: product-schema-configmap
+  backoffLimit: 3
