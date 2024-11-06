@@ -17,7 +17,7 @@ spec:
           image: "postgres:{{ .Values.postgres.version }}"
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: {{ .Values.postgres.port }}
+            - containerPort: {{ .Values.postgres.user.port }}
           envFrom:
             - configMapRef:
                 name: postgres-user-secret
