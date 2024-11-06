@@ -14,7 +14,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: postgres-product-secret  # Nom du secret pour le mot de passe
-              key: password
+              key: POSTGRES_PASSWORD
         command: ["psql"]
         args:
           - "-h"
