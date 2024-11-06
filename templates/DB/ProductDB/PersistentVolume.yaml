@@ -4,7 +4,7 @@ metadata:
   name: storage-product-pv
 spec:
   capacity:
-    storage: {{ .Values.postgresql.productStorage }}
+    storage: {{ .Values.postgres.productStorage }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain

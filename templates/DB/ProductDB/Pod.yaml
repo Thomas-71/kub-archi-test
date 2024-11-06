@@ -1,18 +1,18 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: postgresql-product
+  name: postgres-product
   labels:
-    app: postgresql
+    app: postgres
 spec:
   containers:
-  - name: postgresql
-    image: "postgresql:{{ .Values.postgresql.version }}"
+  - name: postgres
+    image: "postgres:{{ .Values.postgres.version }}"
     env:
     - name: POSTGRES_ROOT_PASSWORD
-      value: {{ .Values.postgresql.rootPassword }}
+      value: {{ .Values.postgres.rootPassword }}
     ports:
-    - containerPort: {{ .Values.postgresql.port }}
+    - containerPort: {{ .Values.postgres.port }}
     volumeMounts:
     - name: schema-volume
       mountPath: /docker-entrypoint-initdb.d/schema.sql
@@ -20,7 +20,7 @@ spec:
   volumes:
     - name: schema-volume
       configMap:
-        name: postgresql-schema
+        name: postgres-schema
         items:
         - key: schema.sql
           path: schema.sql

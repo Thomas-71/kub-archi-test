@@ -1,4 +1,4 @@
-postgresql:
+postgres:
   version: "13.16"
   productStorage: "2Gi"
   rootPassword: "rootPassword"
