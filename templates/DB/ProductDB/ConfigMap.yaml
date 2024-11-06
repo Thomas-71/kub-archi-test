@@ -8,3 +8,7 @@ data:
           id INT PRIMARY KEY AUTO_INCREMENT,
           name VARCHAR(50)
         );
+    create-user.sql: |
+        CREATE USER 'product_user'@'%' IDENTIFIED BY 'password123';
+        GRANT ALL PRIVILEGES ON *.* TO 'product_user'@'%';
+        FLUSH PRIVILEGES;
