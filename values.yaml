@@ -1,12 +1,21 @@
 postgres:
   version: "13.16"
-  dbName: "Product"
-  port: 5432
-  database:
-    name: "Product"
+  product:
+    dbName: "Product"
+    port: 5432
+    database:
+      name: "Product"
+    user:
+      name: "default"
+      password: "1234"
+    storage: "2Gi"
+  
   user:
-    name: "default"
-    password: "1234"
-  storage:
-    product: "2Gi"
-    user: "2Gi"
+    dbName: "User"
+    port: 5433
+    database:
+      name: "User"
+    user:
+      name: "default"
+      password: "1234"
+    storage: "2Gi"
