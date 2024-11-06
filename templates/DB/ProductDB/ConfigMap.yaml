@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: mysql-schema
+data:
+    schema.sql: |
+        CREATE TABLE product (
+          id INT PRIMARY KEY AUTO_INCREMENT,
+          name VARCHAR(50)
+        );
