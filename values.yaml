@@ -3,7 +3,3 @@ mysql:
   productStorage: "2Gi"
   rootPassword: "rootPassword"
   port: 3306
-vitess:
-  gate:
-    version: "v21.0.0"
-    replicas: 1
