@@ -1,5 +1,10 @@
 postgres:
   version: "13.16"
   productStorage: "2Gi"
-  superUserPassword: "1234"
+  dbName: "Product"
   port: 5432
+  database:
+    name: "Product"
+  user:
+    name: "default"
+    password: "1234"
