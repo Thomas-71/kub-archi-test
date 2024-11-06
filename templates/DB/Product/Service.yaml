@@ -6,7 +6,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: {{ .Release.Name }}-product
+    app: postgres-product
   ports:
     - name: db-port
       port: {{ .Values.postgres.product.port }}
