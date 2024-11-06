@@ -9,8 +9,8 @@ spec:
   - name: postgres
     image: "postgres:{{ .Values.postgres.version }}"
     env:
-    - name: POSTGRES_ROOT_PASSWORD
-      value: {{ .Values.postgres.rootPassword }}
+    - name: POSTGRES_PASSWORD
+      value: {{ .Values.postgres.superUserPassword }}
     ports:
     - containerPort: {{ .Values.postgres.port }}
     volumeMounts:

@@ -1,5 +1,5 @@
 postgres:
   version: "13.16"
   productStorage: "2Gi"
-  rootPassword: "rootPassword"
+  superUserPassword: "1234"
   port: 5432
