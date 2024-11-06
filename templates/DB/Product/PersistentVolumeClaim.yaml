@@ -9,5 +9,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.postgres.productStorage }}
+      storage: {{ .Values.postgres.storage.product }}
   

@@ -1,6 +1,5 @@
 postgres:
   version: "13.16"
-  productStorage: "2Gi"
   dbName: "Product"
   port: 5432
   database:
@@ -8,3 +7,6 @@ postgres:
   user:
     name: "default"
     password: "1234"
+  storage:
+    product: "2Gi"
+    user: "2Gi"
