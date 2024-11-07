@@ -23,6 +23,8 @@ spec:
           - {{ .Values.postgres.user.name }}  # Nom d'utilisateur
           - "-d"
           - {{ .Values.postgres.user.dbName }}  # Nom de la base de données
+          - "-p"
+          - "5433"
           - "-f"
           - "/schema/schema.sql"
         volumeMounts:
