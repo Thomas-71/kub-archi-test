@@ -5,7 +5,7 @@ metadata:
   namespace: argo-kube-test
 spec:
   rules:
-  - host: "tbobin.com"
+  - host: "127.0.0.1"
     http:
       paths:
       - path: /product
