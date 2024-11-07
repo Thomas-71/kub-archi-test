@@ -20,7 +20,7 @@ spec:
           - "-c"
           - |
             # Créer la base de données si elle n'existe pas
-            psql -h {{ .Release.Name }}-user -U {{ .Values.postgres.user.name }} -p 5433 -c "CREATE DATABASE IF NOT EXISTS {{ .Values.postgres.user.dbName }};"
+            psql -h {{ .Release.Name }}-user -U {{ .Values.postgres.user.name }} -p 5433 -d postgres -c "CREATE DATABASE IF NOT EXISTS {{ .Values.postgres.user.dbName }};"
             # Appliquer le schéma SQL après la création
             psql -h {{ .Release.Name }}-user -U {{ .Values.postgres.user.name }} -p 5433 -d {{ .Values.postgres.user.dbName }} -f /schema/schema.sql
         volumeMounts:
