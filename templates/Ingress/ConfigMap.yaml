@@ -2,8 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: tcp-services
-  namespace: argo-nginx-ingress-test
-  # Assurez-vous d'utiliser le bon namespace pour votre Ingress Controller
+  namespace: argo-kube-test
 data:
-  "5432": "default/product-service:5432"  # Le service PostgreSQL de la base Product
-  "5433": "default/user-service:5432"     # Le service PostgreSQL de la base User
+  "5432": "default/product-service:5432"
+  "5433": "default/user-service:5432"
