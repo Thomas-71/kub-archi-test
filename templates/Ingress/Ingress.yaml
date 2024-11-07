@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tcp-ingress
+  namespace: argo-nginx-ingress-test  # Peut être ajusté en fonction de vos besoins
+spec:
+  rules:
+  - host: "tbobin.com"  # Nom d'hôte ou IP (à adapter selon votre cas)
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: product-service
+            port:
+              number: {{ .Values.ingress.globalPort }}
+      - path: /user
+        pathType: Prefix
+        backend:
+          service:
+            name: user-service
+            port:
+              number: {{ .Values.ingress.globalPort }}

@@ -13,3 +13,5 @@ postgres:
     user: "default"
     password: "1234"
     storage: "2Gi"
+ingress:
+  globalPort: 8080
