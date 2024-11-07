@@ -15,7 +15,7 @@ spec:
             secretKeyRef:
               name: postgres-user-secret
               key: POSTGRES_PASSWORD
-         command: ["/bin/sh"]
+        command: ["/bin/sh"]
         args:
           - "-c"
           - |
