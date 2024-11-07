@@ -18,7 +18,7 @@ spec:
         command: ["psql"]
         args:
           - "-h"
-          - {{ .Release.Name }}-user  # Nom du service pour Product
+          - {{ .Release.Name }}-user  # Nom du service pour User
           - "-U"
           - {{ .Values.postgres.user.user }}  # Nom d'utilisateur
           - "-d"

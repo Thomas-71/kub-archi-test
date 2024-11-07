@@ -8,6 +8,6 @@ data:
     -- Script SQL pour créer les tables et les relations de la base Users
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
-      name VARCHAR(100) NOT NULL,
+      name VARCHAR(100) NOT NULL
     );
     -- Ajoutez d'autres tables et relations ici
