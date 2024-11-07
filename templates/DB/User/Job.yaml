@@ -24,7 +24,8 @@ spec:
           - "-d"
           - {{ .Values.postgres.user.dbName }}  # Nom de la base de données
           - "-f"
-          - "/schema/schema.sql"volumeMounts:
+          - "/schema/schema.sql"
+        volumeMounts:
         - name: schema-volume
           mountPath: /schema
       restartPolicy: Never
