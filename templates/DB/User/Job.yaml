@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: apply-schema-product
+  name: apply-schema-user
   namespace: argo-kube-test
 spec:
   template:
@@ -13,16 +13,16 @@ spec:
         - name: PGPASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgres-product-secret 
+              name: postgres-user-secret
               key: POSTGRES_PASSWORD
         command: ["psql"]
         args:
           - "-h"
-          - {{ .Release.Name }}-product  # Nom du service pour Product
+          - {{ .Release.Name }}-user  # Nom du service pour User
           - "-U"
-          - {{ .Values.postgres.product.name }}  # Nom d'utilisateur
+          - {{ .Values.postgres.user.name }}  # Nom d'utilisateur
           - "-d"
-          - {{ .Values.postgres.product.dbName }}  # Nom de la base de données
+          - {{ .Values.postgres.user.dbName }}  # Nom de la base de données
           - "-f"
           - "/schema/schema.sql"
         volumeMounts:
@@ -32,5 +32,5 @@ spec:
       volumes:
       - name: schema-volume
         configMap:
-          name: postgre-product-schema
+          name: postgre-user-schema
   backoffLimit: 3

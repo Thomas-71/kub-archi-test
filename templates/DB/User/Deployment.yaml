@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres-user
+      app: {{ .Release.Name }}-user
   template:
     metadata:
       labels:
-        app: postgres-user
+        app: {{ .Release.Name }}-user
     spec:
       containers:
         - name: postgres-user
@@ -19,7 +19,7 @@ spec:
           ports:
             - containerPort: {{ .Values.postgres.user.port }}
           envFrom:
-            - configMapRef:
+            - secretRef:
                 name: postgres-user-secret
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
