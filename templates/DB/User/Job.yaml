@@ -15,18 +15,14 @@ spec:
             secretKeyRef:
               name: postgres-user-secret
               key: POSTGRES_PASSWORD
-        command: ["psql"]
+        command: ["/bin/sh", "-c"]
         args:
-          - "-h"
-          - {{ .Release.Name }}-user  # Nom du service pour User
-          - "-U"
-          - {{ .Values.postgres.user.user }}  # Nom d'utilisateur
-          - "-d"
-          - {{ .Values.postgres.user.dbName }}  # Nom de la base de données
-          - "-p"
-          - "5433"
-          - "-f"
-          - "/schema/schema.sql"
+          - |
+            DB_EXISTS=$(psql -h {{ .Release.Name }}-user -U {{ .Values.postgres.user.user }} -p 5433 -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='User'")
+            if [ -z "$DB_EXISTS" ]; then
+              psql -h {{ .Release.Name }}-user -U {{ .Values.postgres.user.user }} -p 5433 -d postgres -c "CREATE DATABASE \"User\""
+            fi
+            psql -h {{ .Release.Name }}-user -U {{ .Values.postgres.user.user }} -p 5433 -d User -f /schema/schema.sql
         volumeMounts:
         - name: schema-volume
           mountPath: /schema
