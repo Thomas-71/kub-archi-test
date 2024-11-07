@@ -20,7 +20,7 @@ spec:
           - "-h"
           - {{ .Release.Name }}-product  # Nom du service pour Product
           - "-U"
-          - {{ .Values.postgres.product.name }}  # Nom d'utilisateur
+          - {{ .Values.postgres.product.user }}  # Nom d'utilisateur
           - "-d"
           - {{ .Values.postgres.product.dbName }}  # Nom de la base de données
           - "-f"
