@@ -8,7 +8,7 @@ spec:
   - host: "tbobin.com"
     http:
       paths:
-      - path: /
+      - path: /product
         pathType: Prefix
         backend:
           service:
