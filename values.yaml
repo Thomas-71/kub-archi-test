@@ -3,8 +3,6 @@ postgres:
   product:
     dbName: "Product"
     port: 5432
-    database:
-      name: "Product"
     name: "default"
     password: "1234"
     storage: "2Gi"
@@ -12,8 +10,6 @@ postgres:
   user:
     dbName: "User"
     port: 5433
-    database:
-      name: "User"
     name: "default"
     password: "1234"
     storage: "2Gi"
