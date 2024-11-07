@@ -3,13 +3,13 @@ postgres:
   product:
     dbName: "Product"
     port: 5432
-    name: "default"
+    user: "default"
     password: "1234"
     storage: "2Gi"
   
   user:
     dbName: "User"
     port: 5433
-    name: "default"
+    user: "default"
     password: "1234"
     storage: "2Gi"
