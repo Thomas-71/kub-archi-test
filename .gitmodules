@@ -1,0 +1,3 @@
+[submodule "apis/product/breizhsport-server"]
+	path = apis/product/breizhsport-server
+	url = git@github.com:breizhsport-cube-3/breizhsport-server.git
