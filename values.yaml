@@ -3,7 +3,7 @@ postgres:
   breizhsport:
     dbName: "Breizhsport"
     port: 5432
-    user: "default"
+    user: "postgreUser"
     password: "1234"
     storage: "4Gi"
 ingress:
