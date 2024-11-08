@@ -1,0 +1,201 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgre-breizhsport-schema
+  namespace: argo-kube-test
+data:
+  schema.sql: |
+    -- Script SQL pour créer les tables et les relations de la base de donnée Breizhsport
+		CREATE TABLE IF NOT EXISTS "Addresses" (
+			id serial4 NOT NULL,
+			city varchar(255) NOT NULL,
+			zip_code varchar(255) NOT NULL,
+			"number" int4 NOT NULL,
+			street varchar(255) NOT NULL,
+			details varchar(255) NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Addresses_pkey" PRIMARY KEY (id)
+		);
+
+		CREATE TABLE IF NOT EXISTS "Group_Permissions" (
+			id_group int4 NOT NULL,
+			id_permission int4 NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Group_Permissions_pkey" PRIMARY KEY (id_group, id_permission)
+		);
+
+		CREATE TABLE IF NOT EXISTS "Groups" (
+			id serial4 NOT NULL,
+			"name" varchar(255) NOT NULL,
+			code varchar(255) NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Groups_pkey" PRIMARY KEY (id)
+		);
+
+		CREATE TABLE IF NOT EXISTS "Images" (
+			id serial4 NOT NULL,
+			image_path varchar(255) NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Images_pkey" PRIMARY KEY (id)
+		);
+
+		CREATE TABLE IF NOT EXISTS "Order_Items" (
+			id_product int4 NOT NULL,
+			id_order int4 NOT NULL,
+			price numeric NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Order_Items_pkey" PRIMARY KEY (id_product, id_order)
+		);
+
+		CREATE TABLE IF NOT EXISTS "Permissions" (
+			id serial4 NOT NULL,
+			code varchar(255) NOT NULL,
+			"name" varchar(255) NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Permissions_pkey" PRIMARY KEY (id)
+		);
+
+		CREATE TABLE IF NOT EXISTS "Product_Images" (
+			id_product int4 NOT NULL,
+			id_image int4 NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Product_Images_pkey" PRIMARY KEY (id_product, id_image)
+		);
+
+		CREATE TABLE IF NOT EXISTS "Products" (
+			id serial4 NOT NULL,
+			"name" varchar(255) NOT NULL,
+			description varchar(255) NOT NULL,
+			price numeric NOT NULL,
+			category varchar(255) NOT NULL,
+			specs varchar(255) NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Products_pkey" PRIMARY KEY (id)
+		);
+
+		CREATE TABLE IF NOT EXISTS "GroupPermissions" (
+			id_group int4 NOT NULL,
+			id_permission int4 NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "GroupPermissions_pkey" PRIMARY KEY (id_group, id_permission),
+			CONSTRAINT "GroupPermissions_id_group_fkey" FOREIGN KEY (id_group) REFERENCES "Groups"(id),
+			CONSTRAINT "GroupPermissions_id_permission_fkey" FOREIGN KEY (id_permission) REFERENCES "Permissions"(id)
+		);
+
+		CREATE TABLE IF NOT EXISTS "ProductImages" (
+			id_product int4 NOT NULL,
+			id_image int4 NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "ProductImages_pkey" PRIMARY KEY (id_product, id_image),
+			CONSTRAINT "ProductImages_id_image_fkey" FOREIGN KEY (id_image) REFERENCES "Images"(id),
+			CONSTRAINT "ProductImages_id_product_fkey" FOREIGN KEY (id_product) REFERENCES "Products"(id)
+		);
+
+		CREATE TABLE IF NOT EXISTS "Shops" (
+			id serial4 NOT NULL,
+			phone_1 varchar(255) NOT NULL,
+			phone_2 varchar(255) NULL,
+			id_address int4 NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Shops_pkey" PRIMARY KEY (id),
+			CONSTRAINT "Shops_id_address_fkey" FOREIGN KEY (id_address) REFERENCES "Addresses"(id)
+		);
+
+		CREATE TABLE IF NOT EXISTS "Stocks" (
+			id_product int4 NOT NULL,
+			id_shop int4 NOT NULL,
+			quantity int4 NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Stocks_pkey" PRIMARY KEY (id_product, id_shop),
+			CONSTRAINT "Stocks_id_product_fkey" FOREIGN KEY (id_product) REFERENCES "Products"(id),
+			CONSTRAINT "Stocks_id_shop_fkey" FOREIGN KEY (id_shop) REFERENCES "Shops"(id)
+		);
+
+		CREATE TABLE IF NOT EXISTS "Users" (
+			id serial4 NOT NULL,
+			firstname varchar(255) NOT NULL,
+			lastname varchar(255) NOT NULL,
+			avatar varchar(255) NOT NULL,
+			"password" varchar(255) NOT NULL,
+			phone_1 varchar(255) NOT NULL,
+			phone_2 varchar(255) NULL,
+			mail varchar(255) NOT NULL,
+			remember_token varchar(255) NULL,
+			creation_date timestamptz NOT NULL,
+			id_group int4 NOT NULL,
+			id_address int4 NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Users_pkey" PRIMARY KEY (id),
+			CONSTRAINT "Users_id_address_fkey" FOREIGN KEY (id_address) REFERENCES "Addresses"(id),
+			CONSTRAINT "Users_id_group_fkey" FOREIGN KEY (id_group) REFERENCES "Groups"(id)
+		);
+
+		CREATE TABLE IF NOT EXISTS "Cards" (
+			id serial4 NOT NULL,
+			"number" varchar(255) NOT NULL,
+			cvv int4 NOT NULL,
+			exp_date varchar(255) NOT NULL,
+			id_user int4 NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Cards_pkey" PRIMARY KEY (id),
+			CONSTRAINT "Cards_id_user_fkey" FOREIGN KEY (id_user) REFERENCES "Users"(id)
+		);
+
+		CREATE TABLE IF NOT EXISTS "Carts" (
+			id serial4 NOT NULL,
+			items varchar(255) NOT NULL,
+			id_user int4 NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Carts_pkey" PRIMARY KEY (id),
+			CONSTRAINT "Carts_id_user_fkey" FOREIGN KEY (id_user) REFERENCES "Users"(id)
+		);
+
+		CREATE TABLE IF NOT EXISTS "Orders" (
+			id serial4 NOT NULL,
+			status varchar(255) NOT NULL,
+			creation_date timestamptz NOT NULL,
+			id_user int4 NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Orders_pkey" PRIMARY KEY (id),
+			CONSTRAINT "Orders_id_user_fkey" FOREIGN KEY (id_user) REFERENCES "Users"(id)
+		);
+
+		CREATE TABLE IF NOT EXISTS "Reviews" (
+			id_product int4 NOT NULL,
+			id_user int4 NOT NULL,
+			"text" text NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "Reviews_pkey" PRIMARY KEY (id_product, id_user),
+			CONSTRAINT "Reviews_id_product_fkey" FOREIGN KEY (id_product) REFERENCES "Products"(id),
+			CONSTRAINT "Reviews_id_user_fkey" FOREIGN KEY (id_user) REFERENCES "Users"(id)
+		);
+
+		CREATE TABLE IF NOT EXISTS "OrderItems" (
+			id_product int4 NOT NULL,
+			id_order int4 NOT NULL,
+			price numeric NOT NULL,
+			"createdAt" timestamptz NOT NULL,
+			"updatedAt" timestamptz NOT NULL,
+			CONSTRAINT "OrderItems_pkey" PRIMARY KEY (id_product, id_order),
+			CONSTRAINT "OrderItems_id_order_fkey" FOREIGN KEY (id_order) REFERENCES "Orders"(id),
+			CONSTRAINT "OrderItems_id_product_fkey" FOREIGN KEY (id_product) REFERENCES "Products"(id)
+		);
+
+    -- Ajoutez d'autres tables et relations ici

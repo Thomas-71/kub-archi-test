@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: storage-user-pvc
+  name: storage-breizhsport-pvc
   labels:
     app: postgres
 spec:
@@ -9,5 +9,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.postgres.user.storage }}
+      storage: {{ .Values.postgres.breizhsport.storage }}
   

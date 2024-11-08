@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: storage-product-pv
+  name: storage-breizhsport-pv
   labels:
     type: local
     app: postgres
 spec:
   capacity:
-    storage: {{ .Values.postgres.product.storage }}
+    storage: {{ .Values.postgres.breizhsport.storage }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: /data/postgres/product
+    path: /data/postgres/breizhsport
   

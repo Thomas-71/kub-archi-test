@@ -1,17 +1,10 @@
 postgres:
   version: "13.16"
-  product:
-    dbName: "Product"
+  Breizhsport:
+    dbName: "Breizhsport"
     port: 5432
     user: "default"
     password: "1234"
-    storage: "2Gi"
-  
-  user:
-    dbName: "User"
-    port: 5433
-    user: "default"
-    password: "1234"
-    storage: "2Gi"
+    storage: "4Gi"
 ingress:
   globalPort: 8080

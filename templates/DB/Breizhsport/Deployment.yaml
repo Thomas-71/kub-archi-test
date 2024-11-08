@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres-product
+  name: postgres-breizhsport
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-product
+      app: {{ .Release.Name }}-breizhsport
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-product
+        app: {{ .Release.Name }}-breizhsport
     spec:
       containers:
-        - name: postgres-product
+        - name: postgres-breizhsport
           image: "postgres:{{ .Values.postgres.version }}"
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: {{ .Values.postgres.product.port }}
+            - containerPort: {{ .Values.postgres.breizhsport.port }}
           envFrom:
             - secretRef:
-                name: postgres-product-secret
+                name: postgres-breizhsport-secret
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgresdata
       volumes:
         - name: postgresdata
           persistentVolumeClaim:
-            claimName: storage-product-pvc
+            claimName: storage-breizhsport-pvc
