@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: tcp-services
-  namespace: argo-kube-test
-data:
-  "5432": "default/product-service:5432"
-  "5433": "default/user-service:5432"
