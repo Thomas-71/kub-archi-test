@@ -1,6 +1,6 @@
 postgres:
   version: "13.16"
-  Breizhsport:
+  breizhsport:
     dbName: "Breizhsport"
     port: 5432
     user: "default"
