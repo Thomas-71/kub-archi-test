@@ -1,10 +1,13 @@
 postgres:
   version: "13.16"
-  breizhsport:
-    dbName: "Breizhsport"
-    port: 5432
-    user: "postgresUser"
-    password: "1234"
-    storage: "4Gi"
+  replicas: 2
+  dbName: "Breizhsport"
+  port: 5432
+  user: "postgresUser"
+  password: "1234"
+  storage: "4Gi"
 ingress:
   globalPort: 8080
+express:
+  version: "XXXXX"
+  replicas: 2

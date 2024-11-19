@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: postgre-breizhsport-schema
+  name: postgre-schema
   namespace: argo-kube-test
 data:
   schema.sql: |

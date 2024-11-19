@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: storage-breizhsport-pv
+  name: storage-pv
   labels:
     type: local
     app: postgres
 spec:
   capacity:
-    storage: {{ .Values.postgres.breizhsport.storage }}
+    storage: {{ .Values.postgres.storage }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain

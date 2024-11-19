@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: apply-schema-job
+  namespace: argo-kube-test
+spec:
+  template:
+    spec:
+      containers:
+      - name: apply-schema
+        image: "postgres:{{ .Values.postgres.version }}"
+        env:
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret 
+              key: POSTGRES_PASSWORD
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            DB_EXISTS=$(psql -h {{ .Release.Name }}-database -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='{{ .Values.postgres.dbName }}'")
+            if [ -z "$DB_EXISTS" ]; then
+              psql -h {{ .Release.Name }}-database -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d postgres -c "CREATE DATABASE \"{{ .Values.postgres.dbName }}\""
+            fi
+            psql -h {{ .Release.Name }}-database -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d {{ .Values.postgres.dbName }} -f /schema/schema.sql
+        volumeMounts:
+        - name: schema-volume
+          mountPath: /schema
+      restartPolicy: Never
+      volumes:
+      - name: schema-volume
+        configMap:
+          name: postgre-schema
+  backoffLimit: 3
