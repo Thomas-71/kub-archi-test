@@ -4,3 +4,6 @@
 [submodule "apis/product/api-kube-test"]
 	path = apis/product/api-kube-test
 	url = https://github.com/Thomas-71/api-kube-test
+[submodule "templates/API/breizhsport-server"]
+	path = templates/API/breizhsport-server
+	url = git@github.com:breizhsport-cube-3/breizhsport-server.git
