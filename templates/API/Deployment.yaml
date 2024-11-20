@@ -14,4 +14,11 @@ spec:
         app: {{ .Release.Name }}-api
     spec:
       containers:
-        - name: 
+        - name: api-container
+        image: "node:{{ .Values.node.version }}"
+        ports:
+        - containerPort: {{ .Values.node.port }}
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"

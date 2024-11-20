@@ -9,5 +9,7 @@ postgres:
 ingress:
   globalPort: 8080
 express:
-  version: "XXXXX"
   replicas: 2
+node: 
+  version: "20-alpine"
+  port: 8080
