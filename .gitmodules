@@ -1,3 +1,3 @@
-[submodule "templates/API/breizhsport-server"]
-	path = templates/API/breizhsport-server
+[submodule "external/breizhsport-server"]
+	path = external/breizhsport-server
 	url = https://github.com/breizhsport-cube-3/breizhsport-server.git
