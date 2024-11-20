@@ -15,10 +15,10 @@ spec:
     spec:
       containers:
         - name: api-container
-        image: "node:{{ .Values.node.version }}"
-        ports:
-        - containerPort: {{ .Values.node.port }}
-        resources:
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
+          image: "node:{{ .Values.node.version }}"
+          ports:
+            - containerPort: {{ .Values.node.port }}
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
