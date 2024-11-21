@@ -13,3 +13,5 @@ express:
 node: 
   version: "20-alpine"
   port: 8080
+api:
+  githubLink: "https://github.com/breizhsport-cube-3/breizhsport-server.git"
