@@ -15,9 +15,7 @@ spec:
         args:
         - |
           apk add --no-cache git &&
-          git clone {{ .Values.api.githubLink }} /app &&
-          cd /app &&
-          ls &&
+          git clone {{ .Values.api.githubLink }} /app/breizhsport-server &&
           cd /app/breizhsport-server &&
           docker build -t breizhsport-server:local . &&
           echo "Build complete"
