@@ -16,7 +16,7 @@ spec:
         - |
           apk add --no-cache git &&
           git clone {{ .Values.api.githubLink }} /app &&
-          cd /app/external/breizhsport-server &&
+          cd /app/breizhsport-server &&
           docker build -t breizhsport-server:local . &&
           echo "Build complete"
         volumeMounts:
