@@ -4,9 +4,10 @@ metadata:
   name: breizhsport-api
   namespace: argo-kube-test
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
-    app: breizhsport-api
+    app: {{ .Release.Name }}-api
   ports:
-    - port: {{ .Values.node.externalPort }}
-      targetPort: {{ .Values.node.internalPort }}
+  - port: {{ .Values.node.serviceExternalPort }}     # Port exposé par le service (9874)
+    targetPort: {{ .Values.node.podInternalPort }}   # Port où l'application écoute dans le pod (8080)
+    nodePort: {{ .Values.node.clusterExternalPort }}
