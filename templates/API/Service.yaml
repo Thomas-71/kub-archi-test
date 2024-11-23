@@ -8,5 +8,5 @@ spec:
   selector:
     app: breizhsport-api
   ports:
-    - port: {{ .Values.node.external-port }}
-      targetPort: {{ .Values.node.internal-port }}
+    - port: {{ .Values.node.externalPort }}
+      targetPort: {{ .Values.node.internalPort }}

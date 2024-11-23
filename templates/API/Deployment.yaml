@@ -17,7 +17,7 @@ spec:
         - name: api-container
           image: "breizhsport-server:local"
           ports:
-            - containerPort: {{ .Values.node.internal-port }}
+            - containerPort: {{ .Values.node.internalPort }}
           resources:
             limits:
               memory: "512Mi"
