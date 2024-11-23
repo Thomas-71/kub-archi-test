@@ -10,4 +10,4 @@ spec:
   ports:
     - name: db-port
       port: {{ .Values.postgres.port }}
-      targetPort: 5432
+      targetPort: {{ .Values.postgres.port }}
