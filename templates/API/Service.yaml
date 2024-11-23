@@ -4,10 +4,9 @@ metadata:
   name: {{ .Release.Name }}-api-service
   namespace: {{ .Release.Namespace }}
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: {{ .Release.Name }}-api
   ports:
-  - port: {{ .Values.node.serviceExternalPort }}     # Port exposé par le service (9874)
-    targetPort: {{ .Values.node.podInternalPort }}   # Port où l'application écoute dans le pod (8080)
-    nodePort: {{ .Values.node.clusterExternalPort }}
+  - port: {{ .Values.node.port }}
+    targetPort: {{ .Values.node.port }}
