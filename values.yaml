@@ -12,7 +12,7 @@ express:
   replicas: 2
 node: 
   version: "20-alpine"
-  podInternalPort: 8080
+  podInternalPort: 3001
   serviceExternalPort: 31000
   clusterExternalPort: 32000
 api:
