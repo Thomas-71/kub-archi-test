@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: breizhsport-api
+  namespace: argo-kube-test
+spec:
+  type: LoadBalancer
+  selector:
+    app: breizhsport-api
+  ports:
+    - port: {{ .Values.node.external-port }}
+      targetPort: {{ .Values.node.internal-port }}
