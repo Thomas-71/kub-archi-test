@@ -12,7 +12,8 @@ express:
   replicas: 2
 node: 
   version: "20-alpine"
-  internalPort: 8080
-  externalPort: 9874
+  podInternalPort: 8080
+  serviceExternalPort: 9874
+  clusterExternalPort: 32000
 api:
   githubLink: "https://github.com/breizhsport-cube-3/breizhsport-server.git"
