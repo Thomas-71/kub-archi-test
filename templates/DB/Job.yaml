@@ -28,6 +28,4 @@ spec:
       restartPolicy: Never
       volumes:
       - name: schema-volume
-        configMap:
-          name: postgre-schema
   backoffLimit: 3
