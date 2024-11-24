@@ -25,8 +25,12 @@ spec:
 
             DB_EXISTS=$(psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='{{ .Values.postgres.dbName }}'")
             if [ -z "$DB_EXISTS" ]; then
-              echo "Creating database"
+              echo "Creating '{{ .Values.postgres.dbName }}' database"
               psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d postgres -c "CREATE DATABASE \"{{ .Values.postgres.dbName }}\""
+            else
+              echo "Database '{{ .Values.postgres.dbName }}' already exists."
+              echo "Content of '{{ .Values.postgres.dbName }}' database :"
+              psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d {{ .Values.postgres.dbName }} -c "\dt"
             fi
 
         volumeMounts:
