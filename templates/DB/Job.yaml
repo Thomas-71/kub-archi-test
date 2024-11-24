@@ -17,16 +17,15 @@ spec:
               key: POSTGRES_PASSWORD
         command: ["/bin/sh", "-c"]
         args:
-          args:
-            - |
-              echo "Listing databases..."
-              psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d postgres -c "\l"
+          - |
+            echo "Listing databases..."
+            psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d postgres -c "\l"
 
-              echo "Using database: {{ .Values.postgres.dbName }}"
-              psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d {{ .Values.postgres.dbName }} -c "\dt"
+            echo "Using database: {{ .Values.postgres.dbName }}"
+            psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d {{ .Values.postgres.dbName }} -c "\dt"
 
-              echo "Applying schema..."
-              psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d {{ .Values.postgres.dbName }} -f /schema/schema.sql
+            echo "Applying schema..."
+            psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d {{ .Values.postgres.dbName }} -f /schema/schema.sql
         volumeMounts:
         - name: schema-volume
           mountPath: /schema
