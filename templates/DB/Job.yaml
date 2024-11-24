@@ -22,7 +22,6 @@ spec:
             if [ -z "$DB_EXISTS" ]; then
               psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d postgres -c "CREATE DATABASE \"{{ .Values.postgres.dbName }}\""
             fi
-            psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d {{ .Values.postgres.dbName }} -f /schema/schema.sql
         volumeMounts:
         - name: schema-volume
           mountPath: /schema
