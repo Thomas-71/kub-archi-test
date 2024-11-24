@@ -9,5 +9,7 @@ data:
     CREATE TABLE IF NOT EXISTS "Users" (
         id SERIAL PRIMARY KEY,
         firstname varchar(255) NOT NULL,
-        lastname varchar(255) NOT NULL
+        lastname varchar(255) NOT NULL,
+        "createdAt" timestamptz NOT NULL,
+        "updatedAt" timestamptz NOT NULL 
     );
