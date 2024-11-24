@@ -1,13 +1,13 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: apply-schema-job
+  name: create-db-job
   namespace: argo-kube-test
 spec:
   template:
     spec:
       containers:
-      - name: apply-schema
+      - name: create-db
         image: "postgres:{{ .Values.postgres.version }}"
         env:
         - name: PGPASSWORD
