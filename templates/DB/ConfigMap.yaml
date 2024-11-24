@@ -6,6 +6,7 @@ metadata:
 data:
   schema.sql: |
     -- Script SQL pour créer les tables et les relations de la base de donnée Breizhsport
+
     CREATE TABLE IF NOT EXISTS "Addresses" (
         id serial4 NOT NULL,
         city varchar(255) NOT NULL,
@@ -124,7 +125,7 @@ data:
     );
 
     CREATE TABLE IF NOT EXISTS "Users" (
-        id serial4 NOT NULL,
+        id SERIAL PRIMARY KEY,
         firstname varchar(255) NOT NULL,
         lastname varchar(255) NOT NULL,
         avatar varchar(255) NOT NULL,
@@ -197,3 +198,17 @@ data:
         CONSTRAINT "OrderItems_id_order_fkey" FOREIGN KEY (id_order) REFERENCES "Orders"(id),
         CONSTRAINT "OrderItems_id_product_fkey" FOREIGN KEY (id_product) REFERENCES "Products"(id)
     );
+
+    -- Restorer les séquences pour les tables avec SERIAL
+    SELECT pg_catalog.setval(pg_get_serial_sequence('Addresses', 'id'), coalesce(max(id), 1), false) FROM "Addresses";
+    SELECT pg_catalog.setval(pg_get_serial_sequence('Groups', 'id'), coalesce(max(id), 1), false) FROM "Groups";
+    SELECT pg_catalog.setval(pg_get_serial_sequence('Images', 'id'), coalesce(max(id), 1), false) FROM "Images";
+    SELECT pg_catalog.setval(pg_get_serial_sequence('Permissions', 'id'), coalesce(max(id), 1), false) FROM "Permissions";
+    SELECT pg_catalog.setval(pg_get_serial_sequence('Products', 'id'), coalesce(max(id), 1), false) FROM "Products";
+    SELECT pg_catalog.setval(pg_get_serial_sequence('Shops', 'id'), coalesce(max(id), 1), false) FROM "Shops";
+    SELECT pg_catalog.setval(pg_get_serial_sequence('Users', 'id'), coalesce(max(id), 1), false) FROM "Users";
+    SELECT pg_catalog.setval(pg_get_serial_sequence('Cards', 'id'), coalesce(max(id), 1), false) FROM "Cards";
+    SELECT pg_catalog.setval(pg_get_serial_sequence('Carts', 'id'), coalesce(max(id), 1), false) FROM "Carts";
+    SELECT pg_catalog.setval(pg_get_serial_sequence('Orders', 'id'), coalesce(max(id), 1), false) FROM "Orders";
+    SELECT pg_catalog.setval(pg_get_serial_sequence('Reviews', 'id_product'), coalesce(max(id_product), 1), false) FROM "Reviews";
+    SELECT pg_catalog.setval(pg_get_serial_sequence('OrderItems', 'id_product'), coalesce(max(id_product), 1), false) FROM "OrderItems";
