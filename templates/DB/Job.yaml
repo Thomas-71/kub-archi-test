@@ -3,6 +3,8 @@ kind: Job
 metadata:
   name: create-db-job
   namespace: argo-kube-test
+  annotations:
+    argocd.argoproj.io/hook: PreSync
 spec:
   template:
     spec:
