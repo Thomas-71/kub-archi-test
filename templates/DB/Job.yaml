@@ -17,12 +17,16 @@ spec:
               key: POSTGRES_PASSWORD
         command: ["/bin/sh", "-c"]
         args:
-          - |
-            DB_EXISTS=$(psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='{{ .Values.postgres.dbName }}'")
-            if [ -z "$DB_EXISTS" ]; then
-              psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d postgres -c "CREATE DATABASE \"{{ .Values.postgres.dbName }}\""
-            fi
-            psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d {{ .Values.postgres.dbName }} -f /schema/schema.sql
+          args:
+            - |
+              echo "Listing databases..."
+              psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d postgres -c "\l"
+
+              echo "Using database: {{ .Values.postgres.dbName }}"
+              psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d {{ .Values.postgres.dbName }} -c "\dt"
+
+              echo "Applying schema..."
+              psql -h {{ .Release.Name }}-database-internal-service -U {{ .Values.postgres.user }} -p {{ .Values.postgres.port }} -d {{ .Values.postgres.dbName }} -f /schema/schema.sql
         volumeMounts:
         - name: schema-volume
           mountPath: /schema
