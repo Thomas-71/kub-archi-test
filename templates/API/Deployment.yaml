@@ -45,3 +45,8 @@ spec:
                   key: POSTGRES_PORT
             - name: DB_LOCATION
               value: "{{ .Release.Name }}-database-internal-service"
+            - name: API_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: api-secret
+                  key: API_PORT
