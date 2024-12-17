@@ -14,8 +14,14 @@ spec:
         command: ["sh", "-c"]
         args:
         - |
+          mkdir -p ~/.ssh &&
+          echo "{{ .Values.api.sshPrivateKey }}" > ~/.ssh/id_rsa &&
+          chmod 600 ~/.ssh/id_rsa &&
+          eval $(ssh-agent -s) &&
+          ssh-add ~/.ssh/id_rsa &&
+          ssh-keyscan github.com >> ~/.ssh/known_hosts &&
           apk add --no-cache git &&
-          git clone -b develop {{ .Values.api.githubLink }} /app/breizhsport-server &&
+          git clone -b master {{ .Values.api.githubLink }} /app/breizhsport-server &&
           cd /app/breizhsport-server &&
           docker build -t breizhsport-server:local . &&
           echo "Build complete"
