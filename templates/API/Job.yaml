@@ -16,7 +16,7 @@ spec:
         - |
           mkdir -p ~/.ssh &&
           touch ~/.ssh/id_rsa &&
-          echo "{{ .Values.api.sshPrivateKey }}" > ~/.ssh/id_rsa &&
+          echo "{{ .Values.api.sshPrivateKey | b64enc }}" > ~/.ssh/id_rsa &&
           cat ~/.ssh/id_rsa &&
           chmod 600 ~/.ssh/id_rsa &&
           eval $(ssh-agent -s) &&
