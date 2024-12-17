@@ -11,12 +11,18 @@ spec:
       containers:
       - name: docker-build
         image: docker:20.10.24-dind  # Docker-in-Docker
+        env:
+        - name: SSH_KEY
+          valueFrom:
+            secretKeyRef:
+              name: api-secret
+              key: SSH_KEY
         command: ["sh", "-c"]
         args:
         - |
           mkdir -p ~/.ssh &&
           touch ~/.ssh/id_rsa &&
-          echo "{{ .Values.api.sshPrivateKey | b64dec }}" > ~/.ssh/id_rsa &&
+          echo "$SSH_KEY" > ~/.ssh/id_rsa &&
           cat ~/.ssh/id_rsa &&
           chmod 600 ~/.ssh/id_rsa &&
           eval $(ssh-agent -s) &&
